@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday to My Best Buddy! ✨🎂</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            hand: ['"Caveat"', 'cursive'],
+            serif: ['"Playfair Display"', 'serif'],
+          },
+          colors: {
+            midnight: {
+              950: '#07050f',
+              900: '#0d091e',
+              800: '#160f2e',
+              700: '#231846',
+            },
+            plum: {
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+            },
+            aurora: {
+              gold: '#fbbf24',
+              amber: '#f59e0b',
+              rose: '#f43f5e',
+            }
+          },
+          animation: {
+            'float-slow': 'floatSlow 7s ease-in-out infinite',
+            'float-fast': 'floatSlow 4s ease-in-out infinite alternate',
+            'flame': 'flameFlicker 1.5s ease-in-out infinite alternate',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+            'spin-slow': 'spin 18s linear infinite'
+          },
+          keyframes: {
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-14px) rotate(2deg)' },
+            },
+            flameFlicker: {
+              '0%': { transform: 'scale(1) skewX(-2deg)', filter: 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.9))' },
+              '50%': { transform: 'scale(1.15, 0.92) skewX(2deg)', filter: 'drop-shadow(0 0 16px rgba(245, 158, 11, 1))' },
+              '100%': { transform: 'scale(0.95, 1.05) skewX(-1deg)', filter: 'drop-shadow(0 0 10px rgba(251, 191, 36, 0.85))' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.45', transform: 'scale(1)' },
+              '50%': { opacity: '0.8', transform: 'scale(1.06)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Cinematic Midnight Celestial Atmosphere */
+    .bg-cinematic {
+      background-color: #080512;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(225, 29, 72, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(147, 51, 234, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 50% 60%, rgba(245, 158, 11, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 50% 90%, rgba(126, 34, 206, 0.25) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    /* Cinematic glass cards */
+    .glass-panel {
+      background: rgba(22, 15, 46, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    }
+
+    /* Circular Hero Avatar Glow Ring */
+    .avatar-glow-ring {
+      background: conic-gradient(from 180deg at 50% 50%, #f43f5e 0deg, #a855f7 120deg, #fbbf24 240deg, #f43f5e 360deg);
+      box-shadow: 0 0 45px -5px rgba(244, 63, 94, 0.55), 0 0 60px 10px rgba(168, 85, 247, 0.35);
+    }
+
+    /* Polaroid vintage card with washi tape */
+    .polaroid-card {
+      position: relative;
+      background: #140d29;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.7);
+      transition: all 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .polaroid-card:hover {
+      transform: translateY(-8px) scale(1.02) rotate(1deg);
+      border-color: rgba(244, 63, 94, 0.4);
+      box-shadow: 0 25px 40px -10px rgba(244, 63, 94, 0.35);
+    }
+
+    /* Washi tape decoration effect */
+    .washi-tape {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 26px;
+      background: rgba(244, 63, 94, 0.45);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      clip-path: polygon(4% 0%, 96% 0%, 100% 100%, 0% 100%);
+      z-index: 10;
+    }
+
+    /* Candle Wick & Flame */
+    .candle-flame {
+      transform-origin: center bottom;
+      transition: opacity 0.5s ease, transform 0.4s ease;
+    }
+    .candle-flame.blown-out {
+      opacity: 0;
+      transform: scale(0.2) translateY(-10px);
+      pointer-events: none;
+    }
+    .smoke-puff {
+      opacity: 0;
+      animation: smokeRise 1.8s ease-out forwards;
+    }
+    @keyframes smokeRise {
+      0% { opacity: 0.8; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-35px) scale(2.2); filter: blur(3px); }
+    }
+
+    /* Unfold Letter Animation */
+    .letter-body {
+      max-height: 200px;
+      overflow: hidden;
+      transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .letter-body.unfolded {
+      max-height: 2500px;
+    }
+  </style>
+</head>
+<body class="bg-cinematic text-slate-200 font-sans selection:bg-rose-500/30 selection:text-rose-200 relative overflow-x-hidden min-h-screen">
+
+  <!-- Fullscreen Confetti Canvas -->
+  <canvas id="confettiCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-50"></canvas>
+
+  <!-- Floating Celebration Controls -->
+  <aside aria-label="Celebration controls" class="fixed top-5 left-5 z-40 flex items-center gap-2">
+    <button onclick="launchGrandCelebration()" class="p-2 bg-midnight-900/85 backdrop-blur-md rounded-full shadow-2xl border border-white/10 transition-all hover:border-rose-400/50 active:scale-95 focus:outline-none" title="Throw Confetti" aria-label="Celebrate" type="button">
+      <span class="text-base">🎉</span>
+    </button>
+  </aside>
+
+  <!-- Cinematic Background Floating Starlight Spheres -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-60">
+    <div class="absolute top-[8%] left-[10%] text-2xl animate-float-slow select-none text-amber-300">✦</div>
+    <div class="absolute top-[28%] right-[12%] text-3xl animate-float-fast select-none text-rose-400">✨</div>
+    <div class="absolute top-[55%] left-[6%] text-xl animate-float-slow select-none text-purple-300">★</div>
+    <div class="absolute top-[75%] right-[9%] text-2xl animate-float-fast select-none text-pink-300">💫</div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse-glow"></div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <header class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 pb-20 z-10">
+    
+    <!-- Relationship Pill Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 backdrop-blur-md shadow-lg text-rose-300 text-xs sm:text-sm font-semibold tracking-widest uppercase mb-7">
+      <span>✨ Birthday Surprise ✨</span>
+    </div>
+
+    <!-- CIRCULAR HERO PORTRAIT WITH GLOWING ACCENT -->
+    <div class="relative mb-6 group select-none">
+      <!-- Ambient Gradient Halo -->
+      <div class="absolute -inset-2 rounded-full avatar-glow-ring animate-spin-slow opacity-80 blur-md group-hover:opacity-100 transition-opacity"></div>
+      
+      <!-- Photo Container -->
+      <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-1.5 bg-midnight-950/90 shadow-2xl overflow-hidden flex items-center justify-center">
+        <img id="heroPortraitImg" src="v3.jpeg" alt="Birthday Best Buddy" class="w-full h-full object-cover rounded-full transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/400x400/231846/ffffff?text=Add+Her+Photo'">
+      </div>
+
+      <!-- Crown badge on top of circular portrait -->
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-rose-500 text-white text-xs px-2.5 py-0.5 rounded-full shadow-lg font-bold flex items-center gap-1 border border-white/20">
+        <span>👑</span>
+        <span class="text-[10px] uppercase tracking-wider">Birthday Girl</span>
+      </div>
+    </div>
+
+    <!-- Main Headline in Cinematic Typography -->
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mx-auto drop-shadow-md">
+      Happy Birthday Varni <br/>
+      <span class="block font-hand text-5xl sm:text-7xl lg:text-8xl bg-gradient-to-r from-rose-400 via-purple-300 to-amber-300 bg-clip-text text-transparent mt-2 drop-shadow-lg">
+        Wonderful Best Buddy!
+      </span>
+    </h1>
+
+    <p class="mt-6 text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+      Thank you for all the happy talks, silly laughs, and always standing by my side. You make every day brighter, and today the whole universe celebrates <span class="font-semibold text-white underline decoration-rose-400 underline-offset-4">YOU</span>!
+    </p>
+
+    <!-- Simple Fun Stats Counters (Cinematic Glass Style) -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl w-full mt-10 px-2">
+      <div class="glass-panel p-4 rounded-2xl text-center">
+        <span class="text-2xl sm:text-3xl font-extrabold text-rose-400">10,000+</span>
+        <p class="text-xs text-slate-400 font-medium mt-1">Funny Messages 📱</p>
+      </div>
+      <div class="glass-panel p-4 rounded-2xl text-center">
+        <span class="text-2xl sm:text-3xl font-extrabold text-amber-300">Countless</span>
+        <p class="text-xs text-slate-400 font-medium mt-1">Secret Giggles 🤫</p>
+      </div>
+      <div class="glass-panel p-4 rounded-2xl text-center">
+        <span class="text-2xl sm:text-3xl font-extrabold text-purple-300">100%</span>
+        <p class="text-xs text-slate-400 font-medium mt-1">Pure Kindness 🤍</p>
+      </div>
+      <div class="glass-panel p-4 rounded-2xl text-center">
+        <span class="text-2xl sm:text-3xl font-extrabold text-pink-400">Always</span>
+        <p class="text-xs text-slate-400 font-medium mt-1">There for Each Other 👭</p>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE BIRTHDAY CAKE WITH BLOW-OUT CANDLES -->
+    <div class="mt-14 w-full max-w-md mx-auto glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative">
+      <div class="text-center mb-4">
+        <span class="text-[11px] font-bold tracking-widest uppercase text-amber-400">Interactive Birthday Cake</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Make A Wish & Blow The Candles!</h2>
+        <p id="cakeInstruction" class="text-xs text-slate-300 mt-1">Tap each flame or click the button below to blow them out ✨</p>
+      </div>
+
+      <!-- Cake Illustration -->
+      <div class="relative w-64 h-52 mx-auto flex items-center justify-center select-none">
+        <!-- Candles Array -->
+        <div class="absolute -top-3 flex items-center justify-center gap-7 z-20">
+          
+          <!-- Candle 1 -->
+          <div class="relative flex flex-col items-center cursor-pointer group" onclick="blowCandle(1)">
+            <div id="flame-1" class="candle-flame w-5 h-7 bg-gradient-to-t from-amber-500 via-orange-400 to-yellow-200 rounded-full animate-flame"></div>
+            <div id="smoke-1" class="hidden absolute -top-4 text-xs">💨</div>
+            <div class="w-2.5 h-10 bg-gradient-to-b from-rose-400 to-rose-600 rounded-sm shadow-sm mt-0.5"></div>
+          </div>
+
+          <!-- Candle 2 (Middle) -->
+          <div class="relative flex flex-col items-center cursor-pointer group" onclick="blowCandle(2)">
+            <div id="flame-2" class="candle-flame w-5 h-7 bg-gradient-to-t from-amber-500 via-orange-400 to-yellow-200 rounded-full animate-flame"></div>
+            <div id="smoke-2" class="hidden absolute -top-4 text-xs">💨</div>
+            <div class="w-2.5 h-11 bg-gradient-to-b from-purple-400 to-purple-600 rounded-sm shadow-sm mt-0.5"></div>
+          </div>
+
+          <!-- Candle 3 -->
+          <div class="relative flex flex-col items-center cursor-pointer group" onclick="blowCandle(3)">
+            <div id="flame-3" class="candle-flame w-5 h-7 bg-gradient-to-t from-amber-500 via-orange-400 to-yellow-200 rounded-full animate-flame"></div>
+            <div id="smoke-3" class="hidden absolute -top-4 text-xs">💨</div>
+            <div class="w-2.5 h-10 bg-gradient-to-b from-pink-400 to-pink-600 rounded-sm shadow-sm mt-0.5"></div>
+          </div>
+
+        </div>
+
+        <!-- Tier 1 (Top Layer) -->
+        <div class="absolute top-16 w-36 h-12 bg-gradient-to-r from-rose-900/80 via-pink-800/80 to-rose-900/80 rounded-2xl shadow-sm border border-rose-500/40 flex items-center justify-center overflow-hidden">
+          <div class="w-full flex justify-around text-xs opacity-90">🍓 🌸 🍓</div>
+        </div>
+
+        <!-- Tier 2 (Middle Layer) -->
+        <div class="absolute top-24 w-48 h-14 bg-gradient-to-r from-purple-900/90 via-midnight-800 to-purple-900/90 rounded-2xl shadow-md border border-purple-500/40 flex items-center justify-around text-xs">
+          <span>✨</span><span>🧁</span><span>💖</span><span>🧁</span><span>✨</span>
+        </div>
+
+        <!-- Tier 3 (Base Layer) -->
+        <div class="absolute top-34 w-60 h-16 bg-gradient-to-r from-rose-700 via-purple-700 to-rose-700 rounded-3xl shadow-lg border border-white/20 flex items-center justify-around text-xs">
+          <span class="font-hand text-xl font-bold text-white drop-shadow">Happy Birthday!</span>
+        </div>
+
+        <!-- Plate Stand -->
+        <div class="absolute bottom-0 w-64 h-3 bg-white/20 rounded-full shadow-md"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-4 flex justify-center gap-3">
+        <button onclick="blowAllCandles()" id="blowAllBtn" class="px-5 py-2 rounded-full bg-gradient-to-r from-rose-500 via-purple-600 to-amber-500 text-white font-semibold text-xs shadow-lg hover:scale-105 active:scale-95 transition-all">
+          🌬️ Blow Out All Candles
+        </button>
+        <button onclick="reigniteCandles()" class="px-3.5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium border border-white/10 transition-all">
+          Light Again 🔥
+        </button>
+      </div>
+      <p id="wishCelebratedMsg" class="hidden mt-3 text-center text-xs font-bold text-amber-300 animate-pulse">
+        🎉 WISH SENT! May all your sweet dreams come true this year! 🎉
+      </p>
+    </div>
+
+    <!-- Scroll Down Prompt -->
+    <a href="#letterSection" class="mt-12 flex flex-col items-center text-slate-400 hover:text-rose-300 transition-colors">
+      <span class="text-xs uppercase tracking-widest font-semibold">Open Note For You</span>
+      <span class="text-lg animate-bounce mt-1">💌</span>
+    </a>
+  </header>
+
+  <!-- HEARTFELT NOTE FOR BEST BUDDY -->
+  <section id="letterSection" class="max-w-3xl mx-auto px-4 py-20 relative z-10">
+    <div class="text-center mb-10">
+      <span class="text-rose-400 font-bold text-xs tracking-widest uppercase">From My Heart</span>
+      <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mt-2">Why I Am So Grateful For You</h2>
+      <p class="text-slate-400 text-sm mt-2">A small and honest note for my dearest best buddy.</p>
+    </div>
+
+    <!-- Interactive Letter Paper (Cinematic Parchment) -->
+    <article aria-label="Heartfelt birthday letter for best buddy" class="relative glass-panel rounded-3xl p-6 sm:p-12 overflow-hidden transition-all duration-500 border border-white/10">
+      
+      <!-- Seal Header -->
+      <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-6">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-amber-300 font-semibold">Special Letter</span>
+          <p class="font-hand text-2xl text-rose-200">To My Dearest Best Buddy,</p>
+        </div>
+        <button onclick="toggleLetter()" id="letterToggleBtn" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 hover:bg-rose-500/30 text-xs font-semibold transition-all shadow-sm">
+          <span id="sealIcon">📜</span>
+          <span id="sealText">Read Full Note</span>
+        </button>
+      </div>
+
+      <!-- Letter Body -->
+      <div id="letterContent" class="letter-body text-slate-300 space-y-5 leading-relaxed text-sm sm:text-base font-light">
+        <p class="font-serif italic text-lg sm:text-xl text-amber-100">
+          "Having a true best buddy means you always have a hand to hold and someone to share simple joy with."
+        </p>
+
+        <p>
+          Today is your birthday, and I want to tell you how lucky I feel to have you in my life. You are not just a good friend—you are my favorite best buddy. With you, I never have to pretend. I can just be myself, smile freely, and share all my thoughts without any fear.
+        </p>
+
+        <p>
+          Thank you for listening to me whenever I feel sad or worried. Thank you for making me laugh so hard until my stomach hurts. Even on simple, regular days, just talking to you makes everything feel easier and more cheerful.
+        </p>
+
+        <p>
+          I really admire your kind heart. You bring so much sweetness, care, and warmth to everyone around you. You deserve every bit of happiness the world has to give.
+        </p>
+
+        <p>
+          On this special birthday, my wish for you is simple: <strong class="font-semibold text-white">Good health, sweet smiles, lots of success, and a calm, happy heart.</strong>
+        </p>
+
+        <p>
+          No matter how busy life gets, remember that I will always be right here cheering for you and happy to help you.
+        </p>
+
+        <!-- Signature Area -->
+        <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+          <div>
+            <p class="text-xs text-slate-400">With lots of love and gratitude,</p>
+            <p class="font-hand text-3xl sm:text-4xl text-rose-300 mt-1">Your Best Buddy Forever ✨</p>
+          </div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-white/10 text-amber-200 text-xs rounded-full font-medium">
+            <span>🛡️ Best Buddies for Life</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fade overlay when letter is collapsed -->
+      <div id="letterFade" class="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-midnight-950 to-transparent pointer-events-none flex items-end justify-center pb-4">
+        <span class="text-xs text-slate-400 font-medium">Tap 'Read Full Note' to open ✨</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- INTERACTIVE PHOTO GALLERY -->
+  <section id="gallerySection" class="max-w-6xl mx-auto px-4 py-20 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <span class="text-rose-400 font-bold text-xs tracking-widest uppercase">Our Memories</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white mt-1">Special Pictures of You & Us</h2>
+        <p class="text-slate-400 text-sm mt-1">Click any picture to see it bigger, or tap the button to put in your own photos!</p>
+      </div>
+
+      <!-- Photo Swap Button -->
+      <div class="flex items-center gap-3">
+        <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel hover:bg-white/10 text-slate-200 text-xs font-semibold shadow-sm transition-all hover:scale-105 border border-white/15">
+          <span>🖼️ Add Real Photos</span>
+          <input type="file" id="batchPhotoInput" accept="image/*" multiple class="hidden" onchange="handleUserPhotoBatch(event)">
+        </label>
+      </div>
+    </div>
+
+    <!-- Polaroids Grid -->
+    <div id="polaroidGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Polaroid 1 -->
+      <div class="polaroid-card p-4 rounded-2xl cursor-pointer" onclick="openLightbox(0)">
+        <div class="washi-tape"></div>
+        <div class="aspect-square w-full overflow-hidden rounded-xl bg-midnight-950 relative group">
+          <img id="img-0" src="v8.jpeg" alt="Memory 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x600/231846/ffffff?text=Add+Photo+1'">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold">🔍 Tap to View</div>
+        </div>
+        <div class="pt-4 pb-2 text-center">
+          <p id="cap-0" class="font-hand text-2xl text-rose-200">Big Bright Smiles 😄</p>
+          <p class="text-[11px] text-slate-400">Times when we laughed until our eyes teared up</p>
+        </div>
+      </div>
+
+      <!-- Polaroid 2 -->
+      <div class="polaroid-card p-4 rounded-2xl cursor-pointer" onclick="openLightbox(1)">
+        <div class="washi-tape" style="background: rgba(168, 85, 247, 0.45);"></div>
+        <div class="aspect-square w-full overflow-hidden rounded-xl bg-midnight-950 relative group">
+          <img id="img-1" src="v7.jpeg" alt="Memory 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x600/231846/ffffff?text=Add+Photo+2'">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold">🔍 Tap to View</div>
+        </div>
+        <div class="pt-4 pb-2 text-center">
+          <p id="cap-1" class="font-hand text-2xl text-rose-200">Best Buddy Outings 👭</p>
+          <p class="text-[11px] text-slate-400">Every walk and trip is more fun with you</p>
+        </div>
+      </div>
+
+      <!-- Polaroid 3 -->
+      <div class="polaroid-card p-4 rounded-2xl cursor-pointer" onclick="openLightbox(2)">
+        <div class="washi-tape" style="background: rgba(251, 191, 36, 0.45);"></div>
+        <div class="aspect-square w-full overflow-hidden rounded-xl bg-midnight-950 relative group">
+          <img id="img-2" src="v4.jpeg" alt="Memory 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x600/231846/ffffff?text=Add+Photo+3'">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold">🔍 Tap to View</div>
+        </div>
+        <div class="pt-4 pb-2 text-center">
+          <p id="cap-2" class="font-hand text-2xl text-rose-200">Pretty & Radiant ✨</p>
+          <p class="text-[11px] text-slate-400">Always looking lovely and cheerful</p>
+        </div>
+      </div>
+
+      <!-- Polaroid 4 -->
+      <div class="polaroid-card p-4 rounded-2xl cursor-pointer" onclick="openLightbox(3)">
+        <div class="washi-tape" style="background: rgba(244, 63, 94, 0.45);"></div>
+        <div class="aspect-square w-full overflow-hidden rounded-xl bg-midnight-950 relative group">
+          <img id="img-3" src="v1.jpeg" alt="Memory 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x600/231846/ffffff?text=Add+Photo+4'">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold">🔍 Tap to View</div>
+        </div>
+        <div class="pt-4 pb-2 text-center">
+          <p id="cap-3" class="font-hand text-2xl text-rose-200">Celebration Mood 🎉</p>
+          <p class="text-[11px] text-slate-400">Dancing and having the best time</p>
+        </div>
+      </div>
+
+      <!-- Polaroid 5 -->
+      <div class="polaroid-card p-4 rounded-2xl cursor-pointer" onclick="openLightbox(4)">
+        <div class="washi-tape" style="background: rgba(52, 211, 153, 0.45);"></div>
+        <div class="aspect-square w-full overflow-hidden rounded-xl bg-midnight-950 relative group">
+          <img id="img-4" src="v6.jpeg" alt="Memory 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x600/231846/ffffff?text=Add+Photo+5'">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold">🔍 Tap to View</div>
+        </div>
+        <div class="pt-4 pb-2 text-center">
+          <p id="cap-4" class="font-hand text-2xl text-rose-200">Sweet Warm Chats ☕</p>
+          <p class="text-[11px] text-slate-400">Talking about life over snacks and tea</p>
+        </div>
+      </div>
+
+      <!-- Polaroid 6 -->
+      <div class="polaroid-card p-4 rounded-2xl cursor-pointer" onclick="openLightbox(5)">
+        <div class="washi-tape" style="background: rgba(251, 146, 60, 0.45);"></div>
+        <div class="aspect-square w-full overflow-hidden rounded-xl bg-midnight-950 relative group">
+          <img id="img-5" src="v5.jpeg" alt="Memory 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x600/231846/ffffff?text=Add+Photo+6'">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold">🔍 Tap to View</div>
+        </div>
+        <div class="pt-4 pb-2 text-center">
+          <p id="cap-5" class="font-hand text-2xl text-rose-200">Together Always 💖</p>
+          <p class="text-[11px] text-slate-400">Looking forward to many more happy memories</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BUDDY QUIZ SECTION (CINEMATIC) -->
+  <section class="max-w-3xl mx-auto px-4 py-16 relative z-10">
+    <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl border border-white/10">
+      <div class="text-center mb-8">
+        <span class="text-amber-400 font-bold text-xs tracking-widest uppercase">Fun & Friendly Quiz</span>
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">The Best Buddy Test</h2>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1">Answer these 4 easy, funny questions to see our buddy score!</p>
+      </div>
+
+      <!-- Quiz Questions Container -->
+      <div id="quizContainer" class="space-y-6">
+        
+        <!-- Question 1 -->
+        <div class="quiz-item p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10" data-q="1">
+          <p class="font-semibold text-sm sm:text-base text-rose-200">1. If I call you in the middle of the night with big news, what do you do?</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3">
+            <button onclick="answerQuiz(1, 0, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              A) Pick up immediately and say "Tell me everything!" 🍿
+            </button>
+            <button onclick="answerQuiz(1, 1, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              B) Ask if anyone is in trouble first 🚓
+            </button>
+            <button onclick="answerQuiz(1, 2, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              C) Answer half asleep, but still listen carefully 😴
+            </button>
+            <button onclick="answerQuiz(1, 3, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              D) Text right back: "Are you okay?!" 🚨
+            </button>
+          </div>
+          <p id="quizRemark-1" class="hidden text-xs font-semibold text-rose-400 mt-2.5"></p>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="quiz-item p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10" data-q="2">
+          <p class="font-semibold text-sm sm:text-base text-purple-200">2. When you text "I am on my way", what is the real truth?</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3">
+            <button onclick="answerQuiz(2, 0, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              A) I am sitting in the car right now 🚗
+            </button>
+            <button onclick="answerQuiz(2, 1, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              B) I am still searching for my shoes or keys 👟
+            </button>
+            <button onclick="answerQuiz(2, 2, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              C) I just finished dressing up 👗
+            </button>
+            <button onclick="answerQuiz(2, 3, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              D) I am already waiting outside! ⏰
+            </button>
+          </div>
+          <p id="quizRemark-2" class="hidden text-xs font-semibold text-purple-400 mt-2.5"></p>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="quiz-item p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10" data-q="3">
+          <p class="font-semibold text-sm sm:text-base text-amber-200">3. What is our number one way to fix a bad day?</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3">
+            <button onclick="answerQuiz(3, 0, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              A) Order tasty food and sweet desserts 🍩
+            </button>
+            <button onclick="answerQuiz(3, 1, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              B) Go on a long walk and talk about everything 🗣️
+            </button>
+            <button onclick="answerQuiz(3, 2, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              C) Send 50 funny videos until we both laugh 😂
+            </button>
+            <button onclick="answerQuiz(3, 3, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              D) All of the above at once! ✨
+            </button>
+          </div>
+          <p id="quizRemark-3" class="hidden text-xs font-semibold text-amber-400 mt-2.5"></p>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="quiz-item p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10" data-q="4">
+          <p class="font-semibold text-sm sm:text-base text-teal-200">4. How long will we stay as best buddies?</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3">
+            <button onclick="answerQuiz(4, 0, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-teal-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              A) Till next year
+            </button>
+            <button onclick="answerQuiz(4, 1, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-teal-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              B) For the next 10 years
+            </button>
+            <button onclick="answerQuiz(4, 2, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-teal-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              C) Forever and ever, no matter what! 💖
+            </button>
+            <button onclick="answerQuiz(4, 3, this)" class="quiz-opt text-left px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-teal-500/20 border border-white/10 text-xs sm:text-sm text-slate-300 transition-all">
+              D) Even when we are sweet little grandmas 👵👵
+            </button>
+          </div>
+          <p id="quizRemark-4" class="hidden text-xs font-semibold text-teal-400 mt-2.5"></p>
+        </div>
+
+      </div>
+
+      <!-- Quiz Final Score Result -->
+      <div id="quizResultBox" class="hidden mt-8 p-6 rounded-2xl bg-gradient-to-r from-rose-950/80 via-purple-950/80 to-amber-950/80 border border-rose-500/30 text-center">
+        <span class="text-3xl">🏆</span>
+        <h3 class="font-serif font-bold text-xl sm:text-2xl text-amber-200 mt-1">Buddy Score: 100% Perfect Match!</h3>
+        <p class="text-xs sm:text-sm text-slate-300 mt-1">We are officially the best buddy duo in the world. Nobody can beat our friendship!</p>
+        <button onclick="resetQuiz()" class="mt-4 px-4 py-1.5 rounded-full bg-rose-500 text-white hover:bg-rose-600 text-xs font-bold shadow-lg transition-all">
+          🔄 Play Again
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SURPRISE GIFT UNWRAPPING -->
+  <section class="max-w-3xl mx-auto px-4 py-16 text-center relative z-10">
+    <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10 shadow-2xl">
+      <span class="text-rose-400 font-bold text-xs tracking-widest uppercase">Special Gift</span>
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">You Have An Unopened Birthday Gift!</h2>
+      <p class="text-slate-400 text-xs sm:text-sm mt-1">Tap the wrapped present box to unwrap your special buddy voucher.</p>
+
+      <!-- Clickable Gift Box Container -->
+      <div class="my-8 flex justify-center">
+        <button id="giftBoxTrigger" onclick="openSurpriseGift()" class="group relative cursor-pointer focus:outline-none transition-transform active:scale-95">
+          <div class="text-8xl sm:text-9xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_25px_rgba(244,63,94,0.5)] animate-float-slow">
+            🎁
+          </div>
+          <span class="inline-block mt-3 px-5 py-2 bg-gradient-to-r from-rose-500 to-amber-500 text-white rounded-full text-xs font-bold shadow-lg hover:brightness-110 transition-all">
+            Tap to Open! ✨
+          </span>
+        </button>
+      </div>
+
+      <!-- Unwrapped Golden Voucher -->
+      <div id="unwrappedVoucher" class="hidden mt-6 bg-gradient-to-r from-amber-950/70 via-yellow-900/60 to-amber-950/70 border-2 border-dashed border-amber-400/80 p-6 sm:p-8 rounded-2xl shadow-2xl text-center">
+        <div class="text-3xl mb-2">👑 🎟️ 💖</div>
+        <span class="text-xs uppercase tracking-widest text-amber-300 font-bold">Special Pass</span>
+        <h3 class="text-xl sm:text-2xl font-serif font-extrabold text-amber-100 mt-1">The Golden Best Buddy Ticket</h3>
+        <p class="text-xs sm:text-sm text-amber-200 mt-2 max-w-md mx-auto">
+          Gives you: <strong>Always here whenever you need</strong>, <strong>100% Care & Support</strong>, and <strong>Zero Judgment Always</strong>.
+        </p>
+        <p class="text-[11px] text-amber-400 font-mono mt-3">Valid: FOREVER • Ticket No: BUDDY-#1</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL PINBOARD / WISHING WALL (CINEMATIC) -->
+  <section class="max-w-4xl mx-auto px-4 py-16 relative z-10">
+    <div class="glass-panel border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+      <div class="text-center mb-8">
+        <span class="text-amber-400 font-bold text-xs tracking-widest uppercase">Wishing Wall</span>
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">Birthday Wishes Pinboard</h2>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1">Pin your warm wishes for her! They will stay saved right here.</p>
+      </div>
+
+      <!-- Input Bar to Post Sticky Note -->
+      <div class="max-w-xl mx-auto flex flex-col sm:flex-row gap-2 mb-8">
+        <input type="text" id="wisherName" placeholder="Your Name or Nickname" class="px-4 py-2.5 rounded-xl border border-white/10 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 bg-midnight-950/80 text-white placeholder:text-slate-500">
+        <input type="text" id="wisherMessage" placeholder="Write a sweet birthday wish..." class="flex-grow px-4 py-2.5 rounded-xl border border-white/10 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 bg-midnight-950/80 text-white placeholder:text-slate-500">
+        <button onclick="addStickyNote()" class="px-5 py-2.5 bg-gradient-to-r from-rose-500 to-purple-600 hover:brightness-110 text-white rounded-xl text-xs font-bold transition-all shadow-lg active:scale-95 whitespace-nowrap">
+          Pin Note 📌
+        </button>
+      </div>
+
+      <!-- Pinned Notes Container -->
+      <div id="stickyNotesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX FULLSCREEN MODAL FOR PHOTOS -->
+  <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300" onclick="closeLightbox(event)">
+    <div class="relative max-w-3xl w-full bg-midnight-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl p-4 sm:p-6" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-sm z-20">
+        ✕
+      </button>
+      <div class="w-full max-h-[72vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black">
+        <img id="lightboxImg" src="" alt="Enlarged Memory" class="max-w-full max-h-[72vh] object-contain">
+      </div>
+      <div class="pt-4 text-center">
+        <p id="lightboxCaption" class="text-rose-200 font-hand text-3xl"></p>
+        <p class="text-xs text-slate-400 mt-1">A Happy Memory ✨</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-12 text-xs text-slate-500 border-t border-white/5 relative z-10">
+    <p class="font-medium text-slate-400">Made with lots of love, gratitude, and care.</p>
+    <p class="mt-1">Happy Birthday to the greatest best buddy in the world! 🎂💖</p>
+  </footer>
+
+  <!-- AUDIO & INTERACTIVE SCRIPTS -->
+  <script>
+    // ----------------------------------------------------
+    // 0. Hero Portrait Upload Handler
+    // ----------------------------------------------------
+    function handleHeroPortraitUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const img = document.getElementById('heroPortraitImg');
+        img.src = URL.createObjectURL(file);
+        launchGrandCelebration();
+      }
+    }
+
+    // ----------------------------------------------------
+    // 1. Confetti Cannon
+    // ----------------------------------------------------
+    let myConfetti = null;
+
+    function initConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      if (canvas && typeof confetti === 'function') {
+        try {
+          myConfetti = confetti.create(canvas, { resize: true, useWorker: false });
+        } catch (e) {
+          myConfetti = confetti;
+        }
+      } else if (typeof confetti === 'function') {
+        myConfetti = confetti;
+      }
+    }
+
+    function launchGrandCelebration() {
+      if (!myConfetti) initConfetti();
+      if (typeof myConfetti === 'function') {
+        myConfetti({
+          particleCount: 100,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#f43f5e', '#a855f7', '#fbbf24', '#f472b6', '#38bdf8']
+        });
+        setTimeout(() => {
+          myConfetti({
+            particleCount: 60,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#f43f5e', '#c084fc', '#fde047']
+          });
+          myConfetti({
+            particleCount: 60,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#fbbf24', '#f43f5e', '#a855f7']
+          });
+        }, 220);
+      }
+    }
+
+    // ----------------------------------------------------
+    // 2. Richer Birthday Music Engine (Web Audio API)
+    // ----------------------------------------------------
+    let audioCtx = null;
+    let masterGain = null;
+    let isSynthPlaying = false;
+    let synthInterval = null;
+    let melodyIndex = 0;
+    let chordIndex = 0;
+    let buttonChimeEnabled = false;
+    const masterGainLevel = 1;
+
+    const loFiChords = [
+      [261.63, 329.63, 392.00, 493.88],
+      [220.00, 261.63, 329.63, 392.00],
+      [174.61, 220.00, 261.63, 329.63],
+      [196.00, 246.94, 293.66, 349.23],
+    ];
+
+    const melodyNotes = [
+      261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
+      261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
+      261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66,
+      466.16, 466.16, 440.00, 349.23, 392.00, 349.23
+    ];
+
+    function ensureAudioGraph() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      if (!masterGain) {
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = masterGainLevel;
+        masterGain.connect(audioCtx.destination);
+      }
+
+      if (audioCtx.state !== 'running') {
+        return audioCtx.resume();
+      }
+
+      return Promise.resolve();
+    }
+
+    function triggerButtonChime(freq, duration = 1.2, gainLevel = 0.08, waveType = 'triangle', pan = 0) {
+      if (!buttonChimeEnabled) return;
+      playWarmChime(freq, duration, gainLevel, waveType, pan);
+    }
+
+    function playWarmChime(freq, duration = 1.2, gainLevel = 0.08, waveType = 'triangle', pan = 0) {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        if (!masterGain) {
+          masterGain = audioCtx.createGain();
+          masterGain.gain.value = masterGainLevel;
+          masterGain.connect(audioCtx.destination);
+        }
+
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+        const panner = typeof audioCtx.createStereoPanner === 'function'
+          ? audioCtx.createStereoPanner()
+          : null;
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1600, audioCtx.currentTime);
+        filter.Q.value = 1.2;
+
+        osc.type = waveType;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        if (panner) {
+          panner.pan.setValueAtTime(Math.max(-0.9, Math.min(0.9, pan)), audioCtx.currentTime);
+        }
+
+        gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(gainLevel, audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        if (panner) {
+          gain.connect(panner);
+          panner.connect(masterGain);
+        } else {
+          gain.connect(masterGain);
+        }
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (error) {
+        console.error('Unable to play a music note:', error);
+      }
+    }
+
+    function stepLoFiMusic() {
+      if (!isSynthPlaying) return;
+
+      const currentChord = loFiChords[chordIndex % loFiChords.length];
+      currentChord.forEach((f, idx) => {
+        const delay = idx * 0.12;
+        setTimeout(() => {
+          if (isSynthPlaying) {
+            playWarmChime(f * 0.5, 2.2, 0.028 + idx * 0.005, idx % 2 === 0 ? 'sine' : 'triangle', (idx - 1.5) * 0.22);
+          }
+        }, delay * 1000);
+      });
+      chordIndex++;
+
+      const melFreq = melodyNotes[melodyIndex % melodyNotes.length];
+      playWarmChime(melFreq, 0.9, 0.085, 'triangle', 0.25);
+      if (melodyIndex % 4 === 0) {
+        playWarmChime(melFreq / 2, 1.4, 0.05, 'sine', -0.35);
+      }
+      melodyIndex++;
+    }
+
+    function startAutoMusic() {
+      if (isSynthPlaying) return;
+
+      try {
+        ensureAudioGraph().then(() => {
+          if (audioCtx.state !== 'running') return;
+          if (!isSynthPlaying) {
+            isSynthPlaying = true;
+            stepLoFiMusic();
+            synthInterval = setInterval(stepLoFiMusic, 600);
+            removeMusicUnlockListeners();
+          }
+        }).catch(error => {
+          if (audioCtx && audioCtx.state === 'suspended') {
+            console.info('Birthday music is waiting for a user interaction to start.');
+          } else {
+            console.error('Unable to start birthday music:', error);
+          }
+        });
+      } catch (error) {
+        console.error('Unable to initialize birthday music:', error);
+      }
+    }
+
+    const musicUnlockEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
+
+    function removeMusicUnlockListeners() {
+      musicUnlockEvents.forEach(eventName => {
+        window.removeEventListener(eventName, handleMusicUnlock);
+      });
+    }
+
+    function handleMusicUnlock() {
+      startAutoMusic();
+    }
+
+    function enableAutoMusic() {
+      musicUnlockEvents.forEach(eventName => {
+        window.addEventListener(eventName, handleMusicUnlock, { passive: true });
+      });
+      handleMusicUnlock();
+    }
+
+    window.addEventListener('load', () => {
+      initConfetti();
+      setTimeout(launchGrandCelebration, 400);
+      loadSavedStickyNotes();
+      enableAutoMusic();
+    });
+
+    // ----------------------------------------------------
+    // 3. Candle Blowing Logic
+    // ----------------------------------------------------
+    let blownCount = 0;
+    const totalCandles = 3;
+
+    function blowCandle(num) {
+      const flame = document.getElementById(`flame-${num}`);
+      const smoke = document.getElementById(`smoke-${num}`);
+      if (flame && !flame.classList.contains('blown-out')) {
+        flame.classList.add('blown-out');
+        smoke.classList.remove('hidden');
+        smoke.classList.add('smoke-puff');
+        blownCount++;
+
+        triggerButtonChime(520 + (num * 100), 0.6, 0.1);
+
+        if (blownCount >= totalCandles) {
+          allCandlesBlown();
+        }
+      }
+    }
+
+    function blowAllCandles() {
+      for (let i = 1; i <= totalCandles; i++) {
+        blowCandle(i);
+      }
+    }
+
+    function reigniteCandles() {
+      blownCount = 0;
+      for (let i = 1; i <= totalCandles; i++) {
+        const flame = document.getElementById(`flame-${i}`);
+        const smoke = document.getElementById(`smoke-${i}`);
+        if (flame && smoke) {
+          flame.classList.remove('blown-out');
+          smoke.classList.add('hidden');
+          smoke.classList.remove('smoke-puff');
+        }
+      }
+      document.getElementById('wishCelebratedMsg').classList.add('hidden');
+      document.getElementById('cakeInstruction').textContent = "Tap each flame or click the button below to blow them out ✨";
+    }
+
+    function allCandlesBlown() {
+      document.getElementById('wishCelebratedMsg').classList.remove('hidden');
+      document.getElementById('cakeInstruction').textContent = "All candles are blown out! Your birthday wishes are on the way! 🌟";
+      launchGrandCelebration();
+    }
+
+    // ----------------------------------------------------
+    // 4. Expandable Letter Reveal
+    // ----------------------------------------------------
+    function toggleLetter() {
+      const letter = document.getElementById('letterContent');
+      const fade = document.getElementById('letterFade');
+      const text = document.getElementById('sealText');
+      const icon = document.getElementById('sealIcon');
+
+      if (letter.classList.contains('unfolded')) {
+        letter.classList.remove('unfolded');
+        fade.classList.remove('hidden');
+        text.textContent = "Read Full Note";
+        icon.textContent = "📜";
+      } else {
+        letter.classList.add('unfolded');
+        fade.classList.add('hidden');
+        text.textContent = "Close Note";
+        icon.textContent = "💌";
+        launchGrandCelebration();
+      }
+    }
+
+    // ----------------------------------------------------
+    // 5. Lightbox & Photo Gallery Customization
+    // ----------------------------------------------------
+    function openLightbox(index) {
+      const imgEl = document.getElementById(`img-${index}`);
+      const capEl = document.getElementById(`cap-${index}`);
+      const modal = document.getElementById('lightboxModal');
+      const modalImg = document.getElementById('lightboxImg');
+      const modalCaption = document.getElementById('lightboxCaption');
+
+      if (imgEl && capEl && modal) {
+        modalImg.src = imgEl.src;
+        modalCaption.textContent = capEl.textContent;
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.remove('opacity-0'), 20);
+      }
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightboxModal');
+      if (modal) {
+        modal.classList.add('opacity-0');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+      }
+    }
+
+    function handleUserPhotoBatch(event) {
+      const files = event.target.files;
+      if (!files || files.length === 0) return;
+
+      for (let i = 0; i < Math.min(files.length, 6); i++) {
+        const file = files[i];
+        const imgTarget = document.getElementById(`img-${i}`);
+        if (imgTarget) {
+          imgTarget.src = URL.createObjectURL(file);
+        }
+      }
+      launchGrandCelebration();
+    }
+
+    // ----------------------------------------------------
+    // 6. Buddy Quiz Logic
+    // ----------------------------------------------------
+    const quizRemarks = {
+      1: [
+        "A true best buddy answer! Popcorn ready, listening all night! 🍿",
+        "Always cautious and protective! That is so sweet! 🚓",
+        "Half asleep but full love! That is true buddy love! 😴",
+        "Instant care! That is why you are the best! 🚨"
+      ],
+      2: [
+        "Honest and ready! We love to see it! 🚗",
+        "Haha, classic! Keys hiding in strange places as usual! 👟",
+        "Getting pretty takes time, totally understandable! 👗",
+        "Speedy star! Waiting outside like a true champion! ⏰"
+      ],
+      3: [
+        "Yummy food and sweet treats fix everything! 🍩",
+        "Walking and talking works wonders every time! 🗣️",
+        "50 funny videos can make any bad day disappear! 😂",
+        "Yes! The full best-buddy treatment! ✨"
+      ],
+      4: [
+        "Way too short, we are never letting each other go!",
+        "Only 10 years? Let's multiply that by 100!",
+        "Bingo! Best buddies forever and ever! 💖",
+        "Old grandmas laughing together on rocking chairs! Perfect! 👵"
+      ]
+    };
+
+    let answeredQuestions = new Set();
+
+    function answerQuiz(qNum, optionIdx, btnElement) {
+      const parent = btnElement.closest('.quiz-item');
+      const buttons = parent.querySelectorAll('.quiz-opt');
+      buttons.forEach(b => {
+        b.classList.remove('bg-rose-500', 'text-white', 'border-rose-500', 'font-bold');
+      });
+
+      btnElement.classList.add('bg-rose-500', 'text-white', 'border-rose-500', 'font-bold');
+
+      const remarkEl = document.getElementById(`quizRemark-${qNum}`);
+      if (remarkEl) {
+        remarkEl.textContent = "✨ " + quizRemarks[qNum][optionIdx];
+        remarkEl.classList.remove('hidden');
+      }
+
+      triggerButtonChime(440 + (qNum * 90), 0.5, 0.12);
+      answeredQuestions.add(qNum);
+
+      if (answeredQuestions.size >= 4) {
+        const resultBox = document.getElementById('quizResultBox');
+        if (resultBox) {
+          resultBox.classList.remove('hidden');
+          launchGrandCelebration();
+        }
+      }
+    }
+
+    function resetQuiz() {
+      answeredQuestions.clear();
+      document.querySelectorAll('.quiz-opt').forEach(b => {
+        b.classList.remove('bg-rose-500', 'text-white', 'border-rose-500', 'font-bold');
+      });
+      for (let i = 1; i <= 4; i++) {
+        const remark = document.getElementById(`quizRemark-${i}`);
+        if (remark) remark.classList.add('hidden');
+      }
+      const resultBox = document.getElementById('quizResultBox');
+      if (resultBox) resultBox.classList.add('hidden');
+    }
+
+    // ----------------------------------------------------
+    // 7. Surprise Gift Box Unwrapping
+    // ----------------------------------------------------
+    function openSurpriseGift() {
+      const voucher = document.getElementById('unwrappedVoucher');
+      const trigger = document.getElementById('giftBoxTrigger');
+      
+      voucher.classList.remove('hidden');
+      trigger.classList.add('scale-90', 'opacity-60');
+      launchGrandCelebration();
+      
+      triggerButtonChime(784, 0.6, 0.15);
+      setTimeout(() => triggerButtonChime(1046, 1.2, 0.2), 200);
+    }
+
+    // ----------------------------------------------------
+    // 8. Wishing Board / Sticky Notes
+    // ----------------------------------------------------
+    function addStickyNote() {
+      const nameInput = document.getElementById('wisherName');
+      const msgInput = document.getElementById('wisherMessage');
+
+      const name = nameInput.value.trim() || 'A Caring Friend';
+      const msg = msgInput.value.trim();
+
+      if (!msg) {
+        msgInput.placeholder = "Please write a wish first! ✨";
+        msgInput.focus();
+        return;
+      }
+
+      const colors = [
+        { bg: 'bg-amber-950/70', border: 'border-amber-400', text: 'text-amber-300' },
+        { bg: 'bg-rose-950/70', border: 'border-rose-400', text: 'text-rose-300' },
+        { bg: 'bg-purple-950/70', border: 'border-purple-400', text: 'text-purple-300' },
+        { bg: 'bg-indigo-950/70', border: 'border-indigo-400', text: 'text-indigo-300' },
+        { bg: 'bg-teal-950/70', border: 'border-teal-400', text: 'text-teal-300' }
+      ];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const rotations = ['rotate-1', '-rotate-1', 'rotate-2', '-rotate-2'];
+      const rot = rotations[Math.floor(Math.random() * rotations.length)];
+
+      const container = document.getElementById('stickyNotesContainer');
+      const noteDiv = document.createElement('div');
+      noteDiv.className = `${color.bg} p-4 rounded-xl shadow-lg border-t-4 ${color.border} ${rot} relative transition-transform hover:scale-105 border border-white/5`;
+      noteDiv.innerHTML = `
+        <span class="absolute top-1 right-2 text-xs">📌</span>
+        <p class="text-xs text-slate-200 font-medium">"${escapeHtml(msg)}"</p>
+        <span class="block mt-3 text-[11px] font-bold ${color.text}">— ${escapeHtml(name)}</span>
+      `;
+
+      container.prepend(noteDiv);
+      launchGrandCelebration();
+
+      saveStickyNoteToStorage(name, msg, color, rot);
+
+      msgInput.value = '';
+      nameInput.value = '';
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    function saveStickyNoteToStorage(name, msg, color, rot) {
+      try {
+        const current = JSON.parse(localStorage.getItem('bday_sticky_notes') || '[]');
+        current.unshift({ name, msg, color, rot });
+        localStorage.setItem('bday_sticky_notes', JSON.stringify(current.slice(0, 15)));
+      } catch (e) {}
+    }
+
+    function loadSavedStickyNotes() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('bday_sticky_notes') || '[]');
+        const container = document.getElementById('stickyNotesContainer');
+        saved.forEach(item => {
+          const noteDiv = document.createElement('div');
+          noteDiv.className = `${item.color.bg} p-4 rounded-xl shadow-lg border-t-4 ${item.color.border} ${item.rot} relative transition-transform hover:scale-105 border border-white/5`;
+          noteDiv.innerHTML = `
+            <span class="absolute top-1 right-2 text-xs">📌</span>
+            <p class="text-xs text-slate-200 font-medium">"${escapeHtml(item.msg)}"</p>
+            <span class="block mt-3 text-[11px] font-bold ${item.color.text}">— ${escapeHtml(item.name)}</span>
+          `;
+          container.appendChild(noteDiv);
+        });
+      } catch (e) {}
+    }
+  </script>
+</body>
+</html>
